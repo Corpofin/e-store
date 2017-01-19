@@ -45,8 +45,8 @@
                     <button class="btn btn-block btn-success" id="addToCartButton">Add to cart</button>
                 </div>
 
-                
-                
+
+
 
             </div>
 
@@ -68,7 +68,7 @@
                         <tr><th>Attribute</th><th>Value</th></tr>
                     </thead>
                     <tbody>
-                        <% for (var k in product) { 
+                        <% for (var k in product) {
                             var unwanted = [
                             'id', 'product_id', 'stock_type', 'stock_level', 'variant_id', 'display_price','price','name'
                             ]
@@ -87,27 +87,28 @@
     </div>
     <!-- /.container -->
 
-   
-    
+
+
     <% include scripts %>
-   
+
 <script type="text/javascript">
     var product = <%- JSON.stringify(product) %>;
     var cart = <%- JSON.stringify(cart) %>;
+    var user = <%- JSON.stringify(user) %>;
 
+    // var user_id = user.id;
 
     function addToCart() {
         var payload = {
+            user_id: user.id,
             product_id: product.id,
             quantity: 1
         }
         var btn = $("#addToCartButton");
-        btn.attr("disabled","disabled")
+        btn.attr("disabled", "disabled").html("Adding to cart")
 
-        btn.html("Adding to cart")
-        
         if (product.has_variants) {
-            
+
             payload.options = {};
 
             for (var variant_name in product.variantsDefinition) {
@@ -116,9 +117,6 @@
             }
         }
 
-        
-        
-        
         marketcloud.carts.add(cart.id, [payload], function(err, data) {
             if (err) {
                 console.log(err)
@@ -131,7 +129,7 @@
     }
 
 
-    $(document).ready(function(){
+    $(document).ready(function () {
         $("#addToCartButton").click(addToCart)
     })
 

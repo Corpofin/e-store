@@ -19,11 +19,11 @@
                     <th colspan="2">Total</th>
                   </tr>
                 </thead>
-                <tbody>   
+                <tbody>
                 <% for ( var i=0; i< cart.items.length; i++) {
                     var item = cart.items[i];
                 %>
-                  <tr> 
+                  <tr>
                     <td><a href="/item/<%= item.id; %>"><img src="<%= item.images[0]; %>" alt="<%=  item.name ; %>" style="width:32px;"></a></td>
                     <td>
                         <a href="/item/<%= item.id; %>"><%= item.name; %></a>
@@ -37,11 +37,11 @@
                                     </span>
                                     <% } %>
                             <% } %>
-                            
+
                         </div>
                     </td>
                     <td>
-                        <input type="number" 
+                        <input type="number"
                                 id="<%= "quantity_"+item.id+"_"+item.variant_id; %>"
                                 class="form-control"
                                 value="<%= item.quantity; %>">
@@ -60,11 +60,11 @@
                     <button class="btn btn-primary" id="updateCartButton">Update cart</button>
                     <a href="/checkout" class="btn btn-success btn-lg">Checkout</a>
                 </div>
-               
+
             </div>
 
-                
-                
+
+
             </div>
 
         </div>
@@ -78,15 +78,15 @@
     </div>
     <!-- /.container -->
 
-   
+
     <% include scripts %>
     <!-- /.container -->
     <script type="text/javascript">
         var cart = <%- JSON.stringify(cart) %>;
-        
+
         function updateCart() {
             var payload = [];
-            cart.items.forEach(function(item){
+            cart.items.forEach(function (item) {
                 payload.push({
                     product_id : item.product_id,
                     variant_id : item.variant_id,
@@ -112,7 +112,7 @@
                 product_id : product_id,
                 variant_id : variant_id
             }]
-            
+
             marketcloud.carts.remove(cart.id,payload,function(err,data){
                 if (err)
                     return alert("An error has occurred");
@@ -121,7 +121,7 @@
 
             })
         })
-       
+
     </script>
 
 <% include footer %>

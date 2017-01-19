@@ -50,7 +50,7 @@ app.use(session({
     ttl : 24 * 60 * 60 , //1 day
     name : '_mc_frontend_sessid',
     secret: 'oasijdi0jw80dj1nc1hf18u9820310d1dj08810948n184d198s1131dk1di',
-    saveUninitialized : true,    
+    saveUninitialized : true,
     resave: false
 }));
 
@@ -70,37 +70,43 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public/')));
 
 
-app.use(function(req,res,next){
+app.use(function(req, res, next) {
     if (req.session.user) {
         req.app.locals.user = req.session.user;
     }
     next();
 })
 
-app.use(function(req,res,next){
+app.use(function(req, res, next){
 
 
-    var getCartPromise = function(){
-        if (req.session.hasOwnProperty('cart_id')){
+    var getCartPromise = function() {
+        if (req.session.hasOwnProperty('cart_id')) {
+          console.log('call here');
             return req.app.get('marketcloud').carts.getById(req.session.cart_id)
         }
         else{
+            // req.app.get('marketcloud').carts.list().then(function (carts) {
+            //    console.log(carts);
+            // })
+            console.log('wtf');
             return req.app.get('marketcloud').carts.create()
         }
     }
 
     getCartPromise()
-    .then(function(response){
+    .then(function(response) {
+        // console.log(response);
         req.app.locals.cart = response;
         req.session.cart_id = response.id
         next()
-    })  
+    })
     .catch(function(response){
 
         console.log("Unable to create or retrieve a cart.")
         next(response)
     })
-    
+
 })
 
 
