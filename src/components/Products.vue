@@ -3,17 +3,17 @@
     :data="tableData"
     border
     style="width: 100%">
-    <el-table-column fixed prop="date" label="Date" width="150"></el-table-column>
-    <el-table-column prop="name" label="Name" width="120"></el-table-column>
-    <el-table-column prop="state" label="State" width="120"></el-table-column>
-    <el-table-column prop="city" label="City" width="120"></el-table-column>
-    <el-table-column prop="address" label="Address" width="300"></el-table-column>
-    <el-table-column prop="zip" label="Zip" width="120"></el-table-column>
+    <!-- <el-table-column prop="imgTag" label="" width="100"></el-table-column> -->
+    <el-table-column prop="name" label="Name" width="400"></el-table-column>
+    <el-table-column prop="category" label="Category" width="120"></el-table-column>
+    <el-table-column prop="brand" label="Brand" width="120"></el-table-column>
+    <el-table-column prop="stockStatus" label="Stock Status" width="120"></el-table-column>
+    <el-table-column prop="price" label="Price" width="120"></el-table-column>
 
-    <el-table-column fixed="right" label="Operations" width="120">
+    <el-table-column label="Operations" width="150">
       <template scope="scope">
-        <el-button @click="handleClick" type="text" size="small">Detail</el-button>
-        <el-button type="text" size="small">Edit</el-button>
+        <el-button @click="handleClick" size="small">Edit</el-button>
+        <el-button type="danger" size="small">Delete</el-button>
       </template>
     </el-table-column>
 
@@ -31,38 +31,36 @@ export default {
   data () {
     return {
       tableData: [{
-        date: '2016-05-03',
-        name: 'Tom',
-        state: 'California',
-        city: 'Los Angeles',
-        address: 'No. 189, Grove St, Los Angeles',
-        zip: 'CA 90036',
-        tag: 'Home'
-      }, {
-        date: '2016-05-02',
-        name: 'Tom',
-        state: 'California',
-        city: 'Los Angeles',
-        address: 'No. 189, Grove St, Los Angeles',
-        zip: 'CA 90036',
-        tag: 'Office'
-      }, {
-        date: '2016-05-04',
-        name: 'Tom',
-        state: 'California',
-        city: 'Los Angeles',
-        address: 'No. 189, Grove St, Los Angeles',
-        zip: 'CA 90036',
-        tag: 'Home'
-      }, {
-        date: '2016-05-01',
-        name: 'Tom',
-        state: 'California',
-        city: 'Los Angeles',
-        address: 'No. 189, Grove St, Los Angeles',
-        zip: 'CA 90036',
-        tag: 'Office'
-      }]
+        name: 'Acer Aspire E 15 E5-575-33BM',
+        category: 'Computer',
+        brand: 'Acer',
+        stockStatus: 'In stock',
+        price: "$355",
+        // imgTag: "<img src='https://images-na.ssl-images-amazon.com/images/G/01/apparel/rcxgs/tile._CB211431200_.gif'>"
+      },
+      {
+        name: 'HP Notebook 15-ay011nr',
+        category: 'Computer',
+        brand: 'HP',
+        stockStatus: 'Out of stock',
+        price: "$549"
+      },
+      {
+        name: 'NETGEAR Nighthawk AC1750',
+        category: 'Computer',
+        brand: 'NETGEAR',
+        stockStatus: 'In stock',
+        price: "$109"
+      },
+      {
+        name: 'CYBERPOWERPC Gamer Xtreme VR GXiVR8020A Gaming Desktop',
+        category: 'Computer',
+        brand: 'CYBERPOWERPC',
+        stockStatus: 'In stock',
+        price: "$719"
+      }
+
+    ]
     }
   }
 }
@@ -73,6 +71,7 @@ export default {
 h1, h2 {
   font-weight: normal;
 }
+
 
 ul {
   list-style-type: none;
