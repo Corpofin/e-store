@@ -1,23 +1,27 @@
 
 <template>
   <div>
+
     <el-row :gutter="20">
+      <!-- navigation -->
       <el-col :span="4">
         <h2>Admin</h2>
         <el-menu default-active="1" class="el-menu-vertical-demo" theme="dark" @open="handleOpen" @close="handleClose">
           <el-submenu index="1">
             <template slot="title">INVENTORY</template>
-            <el-menu-item index="1-1">Products</el-menu-item>
-            <el-menu-item index="1-2">Categories</el-menu-item>
+            <el-menu-item index="1-1"><router-link to="/products">Products</router-link></el-menu-item>
+            <el-menu-item index="1-2"><router-link to="/categories">Categories</router-link></el-menu-item>
             <el-menu-item index="1-3">Brands</el-menu-item>
           </el-submenu>
           <el-menu-item index="2">ORDERS</el-menu-item>
           <el-menu-item index="3">CUSTOMERS</el-menu-item>
         </el-menu>
       </el-col>
+
+      <!-- main -->
       <el-col :span="20">
 
-          <products></products>
+        <router-view></router-view>
 
       </el-col>
     </el-row>
@@ -59,4 +63,12 @@ body {
   font-family: Roboto, sans-serif;
 }
 
+a {
+  color: #bfcbd9;
+  text-decoration: none;
+
+}
+a.router-link-active {
+  color: #20a0ff;
+}
 </style>

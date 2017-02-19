@@ -1,31 +1,46 @@
 <template>
-  <el-table
-    :data="tableData"
-    border
-    style="width: 100%">
-    <!-- <el-table-column prop="imgTag" label="" width="100"></el-table-column> -->
-    <el-table-column type="index" width="50"></el-table-column>
-    <el-table-column width="100">
-      <template scope="scope">
-        <img :src="scope.row.imgURL" alt="">
+  <div class="">
+    <el-row :gutter="30">
+      <el-col :span="16" >
+        <el-input  placeholder="Search products"  icon="search" ></el-input>
 
-     </template>
-    </el-table-column>
+      </el-col>
+      <el-col :span="4" :offset="4">
+        <el-button type="primary">Add a product <i class="el-icon-plus el-icon-right"></i></el-button>
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-table
+        :data="tableData"
+        border
+        style="width: 100%">
+        <!-- <el-table-column prop="imgTag" label="" width="100"></el-table-column> -->
+        <el-table-column type="index" width="50"></el-table-column>
+        <el-table-column width="100">
+          <template scope="scope">
+            <img :src="scope.row.imgURL" alt="">
 
-    <el-table-column prop="name" label="Name" width="350"></el-table-column>
-    <el-table-column prop="category" label="Category" width="120"></el-table-column>
-    <el-table-column prop="brand" label="Brand" width="150"></el-table-column>
-    <el-table-column prop="stockStatus" label="Stock Status" width="120"></el-table-column>
-    <el-table-column prop="price" label="Price" width="80"></el-table-column>
+         </template>
+        </el-table-column>
 
-    <el-table-column label="Operations" fixed="right" width="150">
-      <template scope="scope">
-        <el-button @click="handleClickEdit" size="small">Edit</el-button>
-        <el-button @click="handleClickDelete" type="danger" size="small">Delete</el-button>
-      </template>
-    </el-table-column>
+        <el-table-column prop="name" label="Name" width="350"></el-table-column>
+        <el-table-column prop="category" label="Category" width="120"></el-table-column>
+        <el-table-column prop="brand" label="Brand" width="150"></el-table-column>
+        <el-table-column prop="stockStatus" label="Stock Status" width="120"></el-table-column>
+        <el-table-column prop="price" label="Price" width="80"></el-table-column>
 
-  </el-table>
+        <el-table-column label="Operations" fixed="right" width="150">
+          <template scope="scope">
+            <el-button @click="handleClickEdit" size="small">Edit</el-button>
+            <el-button @click="handleClickDelete" type="danger" size="small">Delete</el-button>
+          </template>
+        </el-table-column>
+
+      </el-table>
+    </el-row>
+  </div>
+
+
 </template>
 
 <script>
@@ -130,7 +145,11 @@ export default {
 h1, h2 {
   font-weight: normal;
 }
+.el-row {
+  margin-top: 10px;
+  margin-bottom: 10px;
 
+}
 
 ul {
   list-style-type: none;
