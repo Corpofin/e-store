@@ -53,7 +53,6 @@
         msg: 'hello'
       }
     }
-
   }
 </script>
 
@@ -63,12 +62,23 @@ body {
   font-family: Roboto, sans-serif;
 }
 
+.el-submenu .el-menu-item  {
+  padding: 0;
+}
+
 a {
+  display: block;
+  /*position: relative;*/
+  /*width: 300px;*/
+
+  z-index: 2;
   color: #bfcbd9;
+  /*background-color: #333;*/
   text-decoration: none;
 
 }
 a.router-link-active {
   color: #20a0ff;
 }
+
 </style>
