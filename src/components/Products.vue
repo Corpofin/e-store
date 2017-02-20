@@ -6,7 +6,10 @@
 
       </el-col>
       <el-col :span="4" :offset="4">
-        <el-button type="primary">Add a product <i class="el-icon-plus el-icon-right"></i></el-button>
+        <el-button type="primary">
+          <router-link to="/add-product">Add a product <i class="el-icon-plus el-icon-right"></i></router-link>
+        </el-button>
+
       </el-col>
     </el-row>
     <el-row>
@@ -162,7 +165,11 @@ li {
 }
 
 a {
-  color: #42b983;
+  /*color: #42b983;*/
+}
+
+button a {
+  color: #fff;
 }
 
 img {
