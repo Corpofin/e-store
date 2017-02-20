@@ -2,8 +2,7 @@
   <div class="">
     <el-row :gutter="30">
       <el-col :span="16" >
-        <el-input  placeholder="Search products"  icon="search" ></el-input>
-
+        <el-input  placeholder="Search products"  icon="search" v-model="input" :on-icon-click="handleSearchClick"></el-input>
       </el-col>
       <el-col :span="4" :offset="4">
         <el-button type="primary">
@@ -50,6 +49,19 @@
 export default {
   name: 'products',
   methods: {
+    handleSearchClick(ev) {
+      let data = this.tableData;
+      let keyword = this.input;
+      data = data.filter((item) => {
+        console.log(item.name);
+        console.log(item.name.search(keyword.toLowerCase()) );
+        return item.name.toLowerCase().indexOf(keyword.toLowerCase()) >= 0;
+      })
+
+
+      // console.log(keyword)
+      this.tableData = data;
+    },
     handleClickEdit() {
       console.log('click');
     },
@@ -73,71 +85,73 @@ export default {
   },
   data () {
     return {
-      tableData: [{
-        name: 'Acer Aspire E 15 E5-575-33BM',
-        category: 'Computers',
-        brand: 'Acer',
-        stockStatus: 'In stock',
-        price: "$355",
-        imgURL: "https://images-na.ssl-images-amazon.com/images/I/711XyKNjr6L._SL1331_.jpg"
-      },
-      {
-        name: 'HP Notebook 15-ay011nr',
-        category: 'Computers',
-        brand: 'HP',
-        stockStatus: 'Out of stock',
-        price: "$549",
-        imgURL: "https://images-na.ssl-images-amazon.com/images/I/714TSsHtZNL._SL1500_.jpg"
-      },
-      {
-        name: 'NETGEAR Nighthawk AC1750',
-        category: 'Computers',
-        brand: 'NETGEAR',
-        stockStatus: 'In stock',
-        price: "$109",
-        imgURL: "https://images-na.ssl-images-amazon.com/images/I/91-tQAAX4jL._SL1500_.jpg"
-      },
-      {
-        name: 'CYBERPOWERPC Gamer Xtreme VR GXiVR8020A Gaming Desktop',
-        category: 'Computers',
-        brand: 'CYBERPOWERPC',
-        stockStatus: 'In stock',
-        price: "$719",
-        imgURL: "https://images-na.ssl-images-amazon.com/images/I/81nmXFn%2BbDL._SL1500_.jpg"
-      },
-      {
-        name: 'Apple 42mm Smart Watch',
-        category: 'Cell Phones',
-        brand: 'Apple',
-        stockStatus: 'Out of stock',
-        price: "$275",
-        imgURL: "https://images-na.ssl-images-amazon.com/images/I/61WzbpVKIdL._SL1500_.jpg"
-      },
-      {
-        name: 'Samsung Galaxy S7 ',
-        category: 'Cell Phones',
-        brand: 'Samsung',
-        stockStatus: 'In stock',
-        price: "$599",
-        imgURL: "https://images-na.ssl-images-amazon.com/images/I/71xmfDEzOuL._SL1500_.jpg"
-      },
-      {
-        name: 'LG Electronics 65UH8500 65-Inch 4K Smart TV',
-        category: 'TV',
-        brand: 'Samsung',
-        stockStatus: 'In stock',
-        price: "$1670",
-        imgURL: "https://images-na.ssl-images-amazon.com/images/I/91P76LdcFOL._SL1500_.jpg"
-      },
-      {
-        name: 'Apple iPhone 7 128GB',
-        category: 'Cell Phones',
-        brand: 'Apple',
-        stockStatus: 'In stock',
-        price: "$576",
-        imgURL: "http://pisces.bbystatic.com/image2/BestBuy_US/images/products/5581/5581593_sd.jpg;maxHeight=1000;maxWidth=1000"
-      },
-    ]
+      tableData: [
+        {
+          name: 'Acer Aspire E 15 E5-575-33BM',
+          category: 'Computers',
+          brand: 'Acer',
+          stockStatus: 'In stock',
+          price: "$355",
+          imgURL: "https://images-na.ssl-images-amazon.com/images/I/711XyKNjr6L._SL1331_.jpg"
+        },
+        {
+          name: 'HP Notebook 15-ay011nr',
+          category: 'Computers',
+          brand: 'HP',
+          stockStatus: 'Out of stock',
+          price: "$549",
+          imgURL: "https://images-na.ssl-images-amazon.com/images/I/714TSsHtZNL._SL1500_.jpg"
+        },
+        {
+          name: 'NETGEAR Nighthawk AC1750',
+          category: 'Computers',
+          brand: 'NETGEAR',
+          stockStatus: 'In stock',
+          price: "$109",
+          imgURL: "https://images-na.ssl-images-amazon.com/images/I/91-tQAAX4jL._SL1500_.jpg"
+        },
+        {
+          name: 'CYBERPOWERPC Gamer Xtreme VR GXiVR8020A Gaming Desktop',
+          category: 'Computers',
+          brand: 'CYBERPOWERPC',
+          stockStatus: 'In stock',
+          price: "$719",
+          imgURL: "https://images-na.ssl-images-amazon.com/images/I/81nmXFn%2BbDL._SL1500_.jpg"
+        },
+        {
+          name: 'Apple 42mm Smart Watch',
+          category: 'Cell Phones',
+          brand: 'Apple',
+          stockStatus: 'Out of stock',
+          price: "$275",
+          imgURL: "https://images-na.ssl-images-amazon.com/images/I/61WzbpVKIdL._SL1500_.jpg"
+        },
+        {
+          name: 'Samsung Galaxy S7 ',
+          category: 'Cell Phones',
+          brand: 'Samsung',
+          stockStatus: 'In stock',
+          price: "$599",
+          imgURL: "https://images-na.ssl-images-amazon.com/images/I/71xmfDEzOuL._SL1500_.jpg"
+        },
+        {
+          name: 'LG Electronics 65UH8500 65-Inch 4K Smart TV',
+          category: 'TV',
+          brand: 'Samsung',
+          stockStatus: 'In stock',
+          price: "$1670",
+          imgURL: "https://images-na.ssl-images-amazon.com/images/I/91P76LdcFOL._SL1500_.jpg"
+        },
+        {
+          name: 'Apple iPhone 7 128GB',
+          category: 'Cell Phones',
+          brand: 'Apple',
+          stockStatus: 'In stock',
+          price: "$576",
+          imgURL: "http://pisces.bbystatic.com/image2/BestBuy_US/images/products/5581/5581593_sd.jpg;maxHeight=1000;maxWidth=1000"
+        }
+      ],
+      input: ''
     }
   }
 }
