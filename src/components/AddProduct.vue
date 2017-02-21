@@ -1,117 +1,121 @@
 <template>
-  <div class="add-product">
-    <el-row>
-      <el-col :span="16">
-        <el-card class="box-card">
+  <el-row>
 
-          <label>Name*</label>
-          <el-input placeholder="Name" size="large"></el-input>
+    <el-col :span="10">
 
-          <el-row :gutter="30">
-            <el-col :span="12">
-              <label>Category</label>
-              <el-input placeholder="Category" size="large"></el-input>
-            </el-col>
-            <el-col :span="12">
-              <label>Brand</label>
-              <el-input placeholder="Brand" size="large"></el-input>
-            </el-col>
-          </el-row>
+      <h3>Add new product</h3>
 
-          <el-row :gutter="30">
-            <el-col :span="12">
-              <label>Price*</label>
-              <el-input placeholder="Price" size="large">
-                <template slot="append">USD</template>
-              </el-input>
-            </el-col>
-            <el-col :span="12">
-              <label>Quantity</label>
-              <el-input-number v-model="num1" @change="handleChange" size="large" :min="1" :max="10" ></el-input-number>
-            </el-col>
-          </el-row>
+      <el-form ref="form" :rules="rules" :model="form" label-width="120px">
+        <el-form-item label="Name" prop="name">
+          <el-input v-model="form.name"></el-input>
+        </el-form-item>
+        <!-- <el-form-item> -->
+          <!-- <el-col :span="12"> -->
+            <el-form-item label="Category" prop="category">
+              <el-input v-model="form.category"></el-input>
+            </el-form-item>
+          <!-- </el-col> -->
+          <!-- <el-col :span="12"> -->
+            <el-form-item label="Brand" prop="brand">
+              <el-input v-model="form.brand"></el-input>
+            </el-form-item>
+          <!-- </el-col> -->
+        <!-- </el-form-item> -->
 
-            <el-row :gutter="30">
-              <el-col :span="18">
-                <label>Description</label>
-                <el-input  type="textarea"  :autosize="{ minRows: 4, maxRows: 20}" placeholder="Description"></el-input>
-              </el-col>
-            </el-row>
+        <el-form-item label="Price" prop="price">
+          <el-input type="price" v-model.number="form.price">
+            <template slot="append">USD</template>
+          </el-input>
+        </el-form-item>
 
-            <el-row :gutter="30">
-              <el-col :span="18">
-                <label>Image Link</label>
-                <el-input placeholder="Image URL" size="large"></el-input>
-              </el-col>
-              <el-col :span="6">
-                <i class="el-icon-picture"></i>
-              </el-col>
+        <el-form-item label="Quantity" prop="quantity">
+          <el-input-number v-model.number="form.quantity"  size="large" :min="0" ></el-input-number>
+        </el-form-item>
 
-            </el-row>
 
-            <el-row :gutter="30">
-              <el-col :span="2" :offset="20">
-                <el-button type="primary" icon="save" size="large">Save</el-button>
-              </el-col>
-            </el-row>
+        <el-form-item label="Description">
+          <el-input type="textarea" v-model="form.desc"></el-input>
+        </el-form-item>
 
-        </el-card>
-      </el-col>
-    </el-row>
-  </div>
+        <el-form-item label="Image URL">
+          <el-input v-model="form.imageURL"></el-input>
+        </el-form-item>
+
+        <el-form-item>
+          <el-button type="primary" @click="onSubmit('form')">Create</el-button>
+          <el-button>Cancel</el-button>
+        </el-form-item>
+
+      </el-form>
+    </el-col>
+  </el-row>
+
 </template>
 
+
 <script>
-export default {
-  data() {
+  export default {
+    name: 'AddProduct',
+    data() {
       return {
-        num1: 1
-      };
+        form: {
+          name: '',
+          category: '',
+          brand: '',
+          price: '',
+          quantity: '',
+          desc: '',
+          imageURL: ''
+        },
+        rules: {
+         name: [
+           { required: true, message: 'Please input product name', trigger: 'blur' }
+         ],
+        category: [
+            { required: true, message: 'Please input product category', trigger: 'blur' }
+         ],
+         brand: [
+           { required: true, message: 'Please input product brand', trigger: 'blur' }
+         ],
+         price: [
+           { required: true, message: 'Please input product price'},
+           { type: 'number', message: 'price must be a number'}
+         ],
+         quantity: [
+           { required: true, message: 'Please input product quantity'},
+           { type: 'number', message: 'quanlity must be a number'}
+        ]
+       }
+      }
     },
     methods: {
-      handleChange(value) {
-        console.log(value)
+      handleChange() {
+
+      },
+      onSubmit(formName) {
+        console.log('submit!');
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            // alert('submit!');
+            this.$message({
+              type: 'success',
+              message: 'Add product completed'
+            });
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
       }
     }
-}
+  }
 </script>
 
 <style scoped>
-
-/*input.el-input__inner  {
-  margin-bottom: 20px;
-  margin-top: 10px;
-  height: 40px;
-}
-.el-input-group__append {
-  height: 40px !important;
-}*/
-
-label {
-  display: block;
-  margin-top: 20px;
-  margin-bottom: 10px;
-  font-size: 18px;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-.el-input-number {
-  display: block;
-}
-
-i {
-  position: absolute;
-  padding-top: 50px;
-  font-size: 40px;
-}
-
-button.el-button {
-  margin-top: 20px;
-}
-
-
-
-
-
+  h3 {
+    /*margin-left: 100px;*/
+    /*display: block;*/
+    width: 150px;
+    margin: 20px auto;
+  }
 </style>

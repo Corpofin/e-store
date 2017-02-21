@@ -36,7 +36,7 @@
         <el-table-column prop="stockStatus" label="Stock Status" width="120"></el-table-column>
         <el-table-column prop="price" label="Price" width="80"></el-table-column>
 
-        <el-table-column label="" fixed="right" width="60">
+        <el-table-column label="" fixed="right" width="120">
           <template scope="scope">
             <el-button @click="handleClickEdit" size="small"><i class="el-icon-edit"></i></el-button>
             <el-button @click="handleClickDelete" type="danger" size="small"><i class="el-icon-delete"></i></el-button>
@@ -52,7 +52,7 @@
 
 <script>
 export default {
-  name: 'products',
+  name: 'Products',
   methods: {
     handleSearchClick(ev) {
       let data = this.tableData;
