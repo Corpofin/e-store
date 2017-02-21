@@ -26,7 +26,7 @@
               </el-input>
             </el-col>
             <el-col :span="12">
-              <label>Quanlity</label>
+              <label>Quantity</label>
               <el-input-number v-model="num1" @change="handleChange" size="large" :min="1" :max="10" ></el-input-number>
             </el-col>
           </el-row>

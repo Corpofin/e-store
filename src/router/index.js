@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Products from '../components/Products.vue'
 import Categories from '../components/Categories.vue'
 import AddProduct from '../components/AddProduct.vue'
+import Form from '../components/Form.vue'
 import Hello from './Hello.vue'
 
 Vue.use(Router)
@@ -26,8 +27,8 @@ export default new Router({
     },
     {
       path: '/add-product',
-      name: 'AddProduct',
-      component: AddProduct
+      name: 'Form',
+      component: Form
     }
   ]
 })

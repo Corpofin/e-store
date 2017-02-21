@@ -23,7 +23,7 @@
         @selection-change="handleSelectionChange">
         <!-- <el-table-column prop="imgTag" label="" width="100"></el-table-column> -->
         <el-table-column type="selection" width="50"></el-table-column>
-        <el-table-column width="100">
+        <el-table-column width="80">
           <template scope="scope">
             <img :src="scope.row.imgURL" alt="">
 
@@ -36,10 +36,10 @@
         <el-table-column prop="stockStatus" label="Stock Status" width="120"></el-table-column>
         <el-table-column prop="price" label="Price" width="80"></el-table-column>
 
-        <el-table-column label="Operations" fixed="right" width="150">
+        <el-table-column label="" fixed="right" width="60">
           <template scope="scope">
-            <el-button @click="handleClickEdit" size="small">Edit</el-button>
-            <el-button @click="handleClickDelete" type="danger" size="small">Delete</el-button>
+            <el-button @click="handleClickEdit" size="small"><i class="el-icon-edit"></i></el-button>
+            <!-- <el-button @click="handleClickDelete" type="danger" size="small">Delete</el-button> -->
           </template>
         </el-table-column>
 
