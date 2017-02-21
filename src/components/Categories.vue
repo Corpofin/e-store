@@ -1,19 +1,26 @@
+<style lang="css">
+
+
+
+</style>
+
 <template>
-  <div class="">
+
+<div class="">
     Categories page
-  </div>
+</div>
+
 </template>
 
 <script>
+
 export default {
-  name: 'Categories',
-  data () {
-    return {
+    name: 'Categories',
+    data() {
+        return {
 
+        }
     }
-  }
 }
-</script>
 
-<style lang="css">
-</style>
+</script>
