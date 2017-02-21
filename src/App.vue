@@ -13,7 +13,7 @@
             <el-menu-item index="1-2"><router-link to="/categories">Categories</router-link></el-menu-item>
             <el-menu-item index="1-3">Brands</el-menu-item>
           </el-submenu>
-          <el-menu-item index="2">ORDERS</el-menu-item>
+          <el-menu-item index="2"><router-link to="/orders">ORDERS</router-link></el-menu-item>
           <el-menu-item index="3">CUSTOMERS</el-menu-item>
         </el-menu>
       </el-col>

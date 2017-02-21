@@ -4,7 +4,7 @@ import Products from '../components/Products.vue'
 import Categories from '../components/Categories.vue'
 import AddProduct from '../components/AddProduct.vue'
 import Orders from '../components/Orders.vue'
-import Hello from './Hello.vue'
+import Hello from '../components/Hello.vue'
 
 Vue.use(Router)
 
