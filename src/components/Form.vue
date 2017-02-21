@@ -1,31 +1,35 @@
 <template>
   <el-row>
-    <el-col :span="14">
-      <el-form ref="form" :model="form" label-width="120px">
-        <el-form-item label="Name">
+
+    <el-col :span="10">
+
+      <h3>Add new product</h3>
+
+      <el-form ref="form" :rules="rules" :model="form" label-width="120px">
+        <el-form-item label="Name" prop="name">
           <el-input v-model="form.name"></el-input>
         </el-form-item>
         <!-- <el-form-item> -->
           <!-- <el-col :span="12"> -->
-            <el-form-item label="Category">
+            <el-form-item label="Category" prop="category">
               <el-input v-model="form.category"></el-input>
             </el-form-item>
           <!-- </el-col> -->
           <!-- <el-col :span="12"> -->
-            <el-form-item label="Brand">
+            <el-form-item label="Brand" prop="brand">
               <el-input v-model="form.brand"></el-input>
             </el-form-item>
           <!-- </el-col> -->
         <!-- </el-form-item> -->
 
-        <el-form-item label="Price">
-          <el-input v-model="form.price">
+        <el-form-item label="Price" prop="price">
+          <el-input type="price" v-model.number="form.price">
             <template slot="append">USD</template>
           </el-input>
         </el-form-item>
 
-        <el-form-item label="Quantity">
-          <el-input-number v-model="form.quantity" @change="handleChange" size="large" :min="1" ></el-input-number>
+        <el-form-item label="Quantity" prop="quantity">
+          <el-input-number v-model.number="form.quantity"  size="large" :min="0" ></el-input-number>
         </el-form-item>
 
 
@@ -33,8 +37,12 @@
           <el-input type="textarea" v-model="form.desc"></el-input>
         </el-form-item>
 
+        <el-form-item label="Image URL">
+          <el-input v-model="form.imageURL"></el-input>
+        </el-form-item>
+
         <el-form-item>
-          <el-button type="primary" @click="onSubmit">Create</el-button>
+          <el-button type="primary" @click="onSubmit('form')">Create</el-button>
           <el-button>Cancel</el-button>
         </el-form-item>
 
@@ -55,18 +63,59 @@
           category: '',
           brand: '',
           price: '',
-          quantity: 0,
-          desc: ''
-        }
+          quantity: '',
+          desc: '',
+          imageURL: ''
+        },
+        rules: {
+         name: [
+           { required: true, message: 'Please input product name', trigger: 'blur' }
+         ],
+        category: [
+            { required: true, message: 'Please input product category', trigger: 'blur' }
+         ],
+         brand: [
+           { required: true, message: 'Please input product brand', trigger: 'blur' }
+         ],
+         price: [
+           { required: true, message: 'Please input product price'},
+           { type: 'number', message: 'price must be a number'}
+         ],
+         quantity: [
+           { required: true, message: 'Please input product quantity'},
+           { type: 'number', message: 'quanlity must be a number'}
+        ]
+       }
       }
     },
     methods: {
       handleChange() {
 
       },
-      onSubmit() {
+      onSubmit(formName) {
         console.log('submit!');
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            // alert('submit!');
+            this.$message({
+              type: 'success',
+              message: 'Add product completed'
+            });
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
       }
     }
   }
 </script>
+
+<style scoped>
+  h3 {
+    /*margin-left: 100px;*/
+    /*display: block;*/
+    width: 150px;
+    margin: 20px auto;
+  }
+</style>

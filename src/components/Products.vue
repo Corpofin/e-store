@@ -11,7 +11,7 @@
       </el-col>
       <el-col :span="4" :offset="4">
         <el-button type="primary">
-          <router-link to="/add-product">Add a product <i class="el-icon-plus el-icon-right"></i></router-link>
+          <router-link to="/add-product">Add new product <i class="el-icon-plus el-icon-right"></i></router-link>
         </el-button>
 
       </el-col>
@@ -39,7 +39,7 @@
         <el-table-column label="" fixed="right" width="60">
           <template scope="scope">
             <el-button @click="handleClickEdit" size="small"><i class="el-icon-edit"></i></el-button>
-            <!-- <el-button @click="handleClickDelete" type="danger" size="small">Delete</el-button> -->
+            <el-button @click="handleClickDelete" type="danger" size="small"><i class="el-icon-delete"></i></el-button>
           </template>
         </el-table-column>
 
