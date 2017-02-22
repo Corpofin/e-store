@@ -223,9 +223,9 @@ export default {
                 value: 'Paypal',
                 label: 'Paypal'
             }],
-            get orderValue() {
-              return this.orderOptions[0].value
-            },
+            // get orderValue() {
+            //   return this.orderOptions[0].value
+            // },
             // set orderValue(value) {
             //   // console.log(value);
             //   // this.orderValue = value
