@@ -40,7 +40,7 @@ img {
 <div class="">
     <el-row :gutter="30">
         <el-col :span="2">
-            <el-button type="primary" @click="handleClickMultiDelete">
+            <el-button type="danger" @click="handleClickMultiDelete">
                 <i class="el-icon-delete el-icon-right"></i>
             </el-button>
         </el-col>

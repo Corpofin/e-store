@@ -1,6 +1,7 @@
 <style lang="css">
-
-
+  a {
+    color: #3b79c1;
+  }
 
 </style>
 
@@ -8,7 +9,11 @@
 
 <data-tables :data='tableData' :has-action-col='false' :pagination-def='getPaginationDef()' @row-click='rowClick'>
 
-    <el-table-column prop="orderID" label="Order ID" sortable="custom"></el-table-column>
+    <el-table-column prop="orderID" label="Order ID" sortable="custom">
+        <template scope="scope">
+            <router-link :to="{ name: 'order', params: { orderID: scope.row.orderID }}">{{ scope.row.orderID }}</router-link>
+        </template>
+    </el-table-column>
     <el-table-column prop="date" label="Date" sortable="custom"></el-table-column>
     <el-table-column prop="fulfillmentStaus" label="Fulfillment Staus">
         <template scope="scope">
@@ -20,7 +25,11 @@
             <el-tag :type="scope.row.paymentStatus == 'paid' ? 'danger' : 'success'">{{scope.row.paymentStatus}}</el-tag>
         </template>
     </el-table-column>
-    <el-table-column prop="total" label="Total"></el-table-column>
+    <el-table-column prop="total" label="Total">
+      <template scope="scope">
+          {{scope.row.total}}$
+      </template>
+    </el-table-column>
     <el-table-column prop="customerID" label="Customer ID">
 
     </el-table-column>

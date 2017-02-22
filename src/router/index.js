@@ -4,7 +4,9 @@ import Products from '../components/Products.vue'
 import Categories from '../components/Categories.vue'
 import AddProduct from '../components/AddProduct.vue'
 import Orders from '../components/Orders.vue'
+import OrderDetail from '../components/OrderDetail.vue'
 import Hello from '../components/Hello.vue'
+
 
 Vue.use(Router)
 
@@ -34,6 +36,11 @@ export default new Router({
       path: '/orders',
       name: 'Orders',
       component: Orders
+    },
+    {
+      path: '/order/:orderID',
+      name: 'order',
+      component: OrderDetail
     }
   ]
 })
