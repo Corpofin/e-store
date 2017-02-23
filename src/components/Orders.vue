@@ -11,13 +11,13 @@
 
     <el-table-column prop="orderID" label="Order ID" sortable="custom">
         <template scope="scope">
-            <router-link :to="{ name: 'order', params: { orderID: scope.row.orderID }}">{{ scope.row.orderID }}</router-link>
+            <router-link :to="{ name: 'order', params: { orderID: scope.row.orderID }}">#{{ scope.row.orderID }}</router-link>
         </template>
     </el-table-column>
     <el-table-column prop="date" label="Date" sortable="custom"></el-table-column>
     <el-table-column prop="fulfillmentStaus" label="Fulfillment Staus">
         <template scope="scope">
-            <el-tag>{{scope.row.fulfillmentStaus}}</el-tag>
+            <el-tag :type="scope.row.fulfillmentStaus == 'fulfilled' ? 'success' : 'danger'">{{scope.row.fulfillmentStaus}}</el-tag>
         </template>
     </el-table-column>
     <el-table-column prop="paymentStatus" label="Payment Staus">
@@ -47,77 +47,77 @@ export default {
             tableData: [{
                     orderID: '123213',
                     date: '2016-05-03',
-                    fulfillmentStaus: 'pending',
+                    fulfillmentStaus: 'fulfilled',
                     paymentStatus: 'unpaid',
                     total: '540',
                     customerID: '45645'
                 }, {
                     orderID: '67567',
                     date: '2016-10-10',
-                    fulfillmentStaus: 'processing',
+                    fulfillmentStaus: 'unfulfilled',
                     paymentStatus: 'unpaid',
                     total: '540',
                     customerID: '45645'
                 }, {
                     orderID: '123213',
                     date: '2016-05-03',
-                    fulfillmentStaus: 'pending',
+                    fulfillmentStaus: 'fulfilled',
                     paymentStatus: 'paid',
                     total: '540',
                     customerID: '45645'
                 }, {
                     orderID: '67567',
                     date: '2016-10-10',
-                    fulfillmentStaus: 'processing',
+                    fulfillmentStaus: 'unfulfilled',
                     paymentStatus: 'unpaid',
                     total: '540',
                     customerID: '45645'
                 }, {
                     orderID: '123213',
                     date: '2016-05-03',
-                    fulfillmentStaus: 'pending',
+                    fulfillmentStaus: 'fulfilled',
                     paymentStatus: 'unpaid',
                     total: '540',
                     customerID: '45645'
                 }, {
                     orderID: '123213',
                     date: '2016-05-03',
-                    fulfillmentStaus: 'pending',
+                    fulfillmentStaus: 'fulfilled',
                     paymentStatus: 'unpaid',
                     total: '540',
                     customerID: '45645'
                 }, {
                     orderID: '67567',
                     date: '2016-10-10',
-                    fulfillmentStaus: 'processing',
+                    fulfillmentStaus: 'unfulfilled',
                     paymentStatus: 'unpaid',
                     total: '540',
                     customerID: '45645'
                 }, {
                     orderID: '123213',
                     date: '2016-05-03',
-                    fulfillmentStaus: 'pending',
+                    fulfillmentStaus: 'fulfilled',
                     paymentStatus: 'unpaid',
                     total: '540',
                     customerID: '45645'
                 }, {
                     orderID: '123213',
                     date: '2016-05-03',
-                    fulfillmentStaus: 'pending',
+                    fulfillmentStaus: 'fulfilled',
                     paymentStatus: 'unpaid',
                     total: '540',
                     customerID: '45645'
                 }, {
                     orderID: '123213',
                     date: '2016-05-03',
-                    fulfillmentStaus: 'pending',
+                    fulfillmentStaus: 'fulfilled',
                     paymentStatus: 'unpaid',
                     total: '540',
                     customerID: '45645'
                 }, {
                     orderID: '123213',
                     date: '2016-05-03',
-                    fulfillmentStaus: 'pending',
+                    fulfillmentStaus: 'fulfilled',
                     paymentStatus: 'unpaid',
                     total: '540',
                     customerID: '45645'

@@ -32,15 +32,14 @@ div.section {
 }
 
 .total {
-  margin-top: 20px;
-  font-weight: bold;
+    margin-top: 20px;
+    font-weight: bold;
 }
 
 .total p {
-  float: right;
-  margin-right: 40px;
-  margin-top: 0;
-
+    float: right;
+    margin-right: 40px;
+    margin-top: 0;
 }
 
 </style>
@@ -60,9 +59,9 @@ div.section {
                     <p>{{ this.order.date }}</p>
                 </div>
                 <div class="section">
-                    <p class="title">Shipping method</p>
-                    <el-select v-model="shippingValue" placeholder="Select">
-                        <el-option v-for="item in shippingOptions" :label="item.label" :value="item.value">
+                    <p class="title">Fulfillment</p>
+                    <el-select v-model="fulfillmentValue" placeholder="Select">
+                        <el-option v-for="item in fulfillmentOptions" :label="item.label" :value="item.value">
                         </el-option>
                     </el-select>
                 </div>
@@ -79,7 +78,7 @@ div.section {
                     </el-select>
                 </div>
                 <div class="section">
-                    <p class="title">Payment method</p>
+                    <p class="title">Payment</p>
                     <el-select v-model="paymentValue" placeholder="Select">
                         <el-option v-for="item in paymentOptions" :label="item.label" :value="item.value">
                         </el-option>
@@ -90,7 +89,7 @@ div.section {
             </el-col>
             <el-col :span="24">
                 <div class="update">
-                    <el-button type="primary"  @click='update' >Update</el-button>
+                    <el-button type="primary" @click='update'>Update</el-button>
                 </div>
 
             </el-col>
@@ -155,17 +154,19 @@ div.section {
 
 export default {
     methods: {
-      update() {
-        console.log(this.orderValue);
-        console.log(this.shippingValue);
-      }
+        update() {
+                console.log(this.orderValue);
+                console.log(this.fulfillmentValue);
+            },
+
     },
     data() {
         return {
             order: {
                 orderID: '123213',
                 date: '2016-05-03',
-                fulfillmentStaus: 'pending',
+                status: 'open',
+                fulfillmentStaus: 'unfulfilled',
                 paymentStatus: 'unpaid',
                 total: 1323,
                 customerID: '45645'
@@ -188,58 +189,47 @@ export default {
                 total: 798
             }],
             orderOptions: [{
-                value: 'pending_payment',
-                label: 'Pending payment'
-            }, {
-                value: 'processing',
-                label: 'Processing'
+                value: 'open',
+                label: 'Open'
             }, {
                 value: 'completed',
                 label: 'Completed'
             }, {
-                value: 'on_hold',
-                label: 'On hold'
-            }, {
                 value: 'canceled',
                 label: 'Canceled'
             }],
-            shippingOptions: [{
-                value: 'Standard',
-                label: 'Standard'
+            fulfillmentOptions: [{
+                value: 'unfulfilled',
+                label: 'Unfulfilled'
             }, {
-                value: 'Worldwide Express',
-                label: 'Worldwide Express'
+                value: 'shipped',
+                label: 'Shipped'
+            }, {
+                value: 'fulfilled',
+                label: 'Fulfilled'
             }],
             paymentOptions: [{
-                value: 'Visa',
-                label: 'Visa'
+                value: 'unpaid',
+                label: 'Unpaid'
             }, {
-                value: 'MasterCard',
-                label: 'MasterCard'
+                value: 'processing',
+                label: 'Processing'
             }, {
-                value: 'American Express',
-                label: 'American Express'
+                value: 'pending',
+                label: 'Pending'
             }, {
-                value: 'Paypal',
-                label: 'Paypal'
+                value: 'paid',
+                label: 'Paid'
             }],
-            // get orderValue() {
-            //   return this.orderOptions[0].value
-            // },
-            // set orderValue(value) {
-            //   // console.log(value);
-            //   // this.orderValue = value
-            // },
-            // get shippingValue() {
-            //   return this.shippingOptions[0].value
-            // },
-            // get paymentValue() {
-            //   return this.paymentOptions[1].value
-            // },
             orderValue: '',
-            shippingValue: '',
+            fulfillmentValue: '',
             paymentValue: ''
         }
+    },
+    created: function() {
+        this.orderValue = this.order.status;
+        this.fulfillmentValue = this.order.fulfillmentStaus;
+        this.paymentValue = this.order.paymentStatus;
     }
 
 }
