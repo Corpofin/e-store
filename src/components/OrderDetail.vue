@@ -202,21 +202,12 @@ export default {
                 value: 'unfulfilled',
                 label: 'Unfulfilled'
             }, {
-                value: 'shipped',
-                label: 'Shipped'
-            }, {
                 value: 'fulfilled',
                 label: 'Fulfilled'
             }],
             paymentOptions: [{
                 value: 'unpaid',
                 label: 'Unpaid'
-            }, {
-                value: 'processing',
-                label: 'Processing'
-            }, {
-                value: 'pending',
-                label: 'Pending'
             }, {
                 value: 'paid',
                 label: 'Paid'

@@ -2,6 +2,9 @@
   a {
     color: #3b79c1;
   }
+  .el-table--border td {
+    border-right: none;
+  }
 
 </style>
 
