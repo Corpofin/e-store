@@ -14,7 +14,7 @@
             <el-menu-item index="1-3">Brands</el-menu-item>
           </el-submenu>
           <el-menu-item index="2"><router-link to="/orders">ORDERS</router-link></el-menu-item>
-          <el-menu-item index="3">CUSTOMERS</el-menu-item>
+          <el-menu-item index="3"><router-link to="/users">CUSTOMERS</router-link></el-menu-item>
         </el-menu>
       </el-col>
 
@@ -31,12 +31,9 @@
 </template>
 
 <script>
-  import Products from './components/Products.vue'
+  import axios from 'axios'
 
   export default {
-    components: {
-      Products
-    },
     methods: {
       handleClick() {
         console.log('click');

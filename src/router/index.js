@@ -6,7 +6,8 @@ import AddProduct from '../components/AddProduct.vue'
 import Orders from '../components/Orders.vue'
 import OrderDetail from '../components/OrderDetail.vue'
 import Hello from '../components/Hello.vue'
-
+import Users from '../components/Users.vue'
+import UserDetail from '../components/UserDetail.vue'
 
 Vue.use(Router)
 
@@ -41,6 +42,16 @@ export default new Router({
       path: '/order/:orderID',
       name: 'order',
       component: OrderDetail
-    }
+    },
+    {
+      path: '/users',
+      name: 'Users',
+      component: Users
+    },
+    {
+      path: '/user/:userID',
+      name: 'user',
+      component: UserDetail
+    },
   ]
 })
