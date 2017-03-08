@@ -10,12 +10,17 @@
 
 <template>
 
-<data-tables :data='tableData' :pagination-def='getPaginationDef()' :actions-def='getActionsDef()' :row-action-def='getRowActionsDef()' action-col-width='50' @selection-change="handleSelectionChange">
+<data-tables :data='tableData'  :has-action-col='false' :pagination-def='getPaginationDef()' :actions-def='getActionsDef()' @selection-change="handleSelectionChange">
     <el-table-column type="selection" width="50"></el-table-column>
     <el-table-column prop="name" label="Name" sortable="custom"></el-table-column>
     <el-table-column prop="email" label="Email" sortable="custom"></el-table-column>
     <el-table-column prop="registerd_since" label="Registerd Since" sortable="custom"></el-table-column>
-
+    <el-table-column label="" fixed="right" width="120">
+        <template scope="scope">
+            <el-button @click="handleClickEdit" size="small"><a href="/sdfsd"><i class="el-icon-edit"></i></a></el-button>
+            <el-button @click="handleClickDelete" type="danger" size="small"><i class="el-icon-delete"></i></el-button>
+        </template>
+        </el-table-column>
 </data-tables>
 
 </template>
@@ -71,7 +76,13 @@ export default {
         }
     },
     methods: {
-        handleSelectionChange(val) {
+            handleClickEdit() {
+
+            },
+            handleClickDelete() {
+
+            },
+            handleSelectionChange(val) {
                 this.multipleSelection = val;
 
                 console.log(val.name);
@@ -86,7 +97,7 @@ export default {
                         handler() {
 
                             console.log("delete hihi");
-                            self.$confirm('This will permanently delete the product. Continue?', 'Warning', {
+                            self.$confirm('This will permanently delete the users. Continue?', 'Warning', {
                                 confirmButtonText: 'OK',
                                 cancelButtonText: 'Cancel',
                                 type: 'warning'
@@ -117,24 +128,24 @@ export default {
                 }
             },
 
-            getRowActionsDef() {
-                let self = this
-                return [{
-                    type: 'primary',
-                    handler(row) {
-                        self.$message('Edit clicked')
-                        console.log('Edit in row clicked', row)
-                    },
-                    name: 'Edit'
-                }, {
-                    type: 'danger',
-                    handler(row) {
-                        self.$message('Delete in row clicked')
-                        console.log('Delete in row clicked', row)
-                    },
-                    name: 'Delete'
-                }]
-            },
+            // getRowActionsDef() {
+            //     let self = this
+            //     return [{
+            //         type: 'primary',
+            //         handler(row) {
+            //             self.$message('Edit clicked')
+            //             console.log('Edit in row clicked', row)
+            //         },
+            //         name: 'Edit'
+            //     }, {
+            //         type: 'danger',
+            //         handler(row) {
+            //             self.$message('Delete in row clicked')
+            //             console.log('Delete in row clicked', row)
+            //         },
+            //         name: 'Delete'
+            //     }]
+            // },
 
             getPaginationDef() {
                 return {
