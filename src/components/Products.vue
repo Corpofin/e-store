@@ -55,7 +55,7 @@ img {
 
     <el-table-column label="" fixed="right" width="120">
         <template scope="scope">
-            <el-button @click="handleClickEdit" size="small"><i class="el-icon-edit"></i></el-button>
+            <el-button @click="handleClickEdit(scope.row.product_id)" size="small"><i class="el-icon-edit"></i></el-button>
             <el-button @click="handleClickDelete(scope.row.product_id)" type="danger" size="small"><i class="el-icon-delete"></i></el-button>
         </template>
     </el-table-column>
@@ -75,9 +75,6 @@ export default {
                 this.multipleSelection = val;
 
                 // console.log(val.name);
-            },
-            handleClickEdit() {
-                console.log('click');
             },
             getActionsDef() {
                 let self = this
@@ -118,6 +115,9 @@ export default {
                         icon: 'delete'
                     }]
                 }
+            },
+            handleClickEdit(id) {
+                this.$router.push({ name: 'UpdateProduct', params: { productID: id }})
             },
             handleClickDelete(id) {
 

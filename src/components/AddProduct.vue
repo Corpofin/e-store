@@ -140,7 +140,6 @@ export default {
                           console.log(error);
                       });
 
-                  this.form = {}
               } else {
                   console.log('error submit!!');
                   return false;
