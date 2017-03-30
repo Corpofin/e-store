@@ -1,0 +1,142 @@
+<style scoped>
+
+h3 {
+
+    width: 150px;
+    margin: 20px auto;
+}
+
+</style>
+
+<template>
+
+<el-row>
+
+    <el-col :span="10">
+
+        <h3>Update product  {{$route.params.productID}}</h3>
+
+        <el-form ref="form" :rules="rules" :model="form" label-width="120px">
+            <el-form-item label="Name" prop="name">
+                <el-input v-model="form.name"></el-input>
+            </el-form-item>
+            <!-- <el-form-item> -->
+            <!-- <el-col :span="12"> -->
+            <el-form-item label="Category" prop="category">
+                <el-input v-model="form.category"></el-input>
+            </el-form-item>
+            <!-- </el-col> -->
+            <!-- <el-col :span="12"> -->
+            <el-form-item label="Brand" prop="brand">
+                <el-input v-model="form.brand"></el-input>
+            </el-form-item>
+            <!-- </el-col> -->
+            <!-- </el-form-item> -->
+
+            <el-form-item label="Price" prop="price">
+                <el-input type="price" v-model.number="form.price">
+                    <template slot="append">USD</template>
+                </el-input>
+            </el-form-item>
+
+            <el-form-item label="Quantity" prop="quantity">
+                <el-input-number v-model.number="form.quantity" size="large" :min="0"></el-input-number>
+            </el-form-item>
+
+
+            <el-form-item label="Description">
+                <el-input type="textarea" v-model="form.desc"></el-input>
+            </el-form-item>
+
+            <el-form-item label="Image URL">
+                <el-input v-model="form.imageURL"></el-input>
+            </el-form-item>
+
+            <el-form-item>
+                <el-button type="primary" @click="onSubmit('form')">Update</el-button>
+                <el-button>Cancel</el-button>
+            </el-form-item>
+
+        </el-form>
+    </el-col>
+</el-row>
+
+</template>
+
+<script>
+
+import axios from 'axios'
+
+
+
+export default {
+    name: 'UpdateProduct',
+    data() {
+        return {
+            form: {
+                name: '',
+                category: '',
+                brand: '',
+                price: '',
+                quantity: '',
+                desc: '',
+                imageURL: ''
+            },
+            rules: {
+                name: [{
+                    required: true,
+                    message: 'Please input product name',
+                    trigger: 'blur'
+                }],
+                category: [{
+                    required: true,
+                    message: 'Please input product category',
+                    trigger: 'blur'
+                }],
+                brand: [{
+                    required: true,
+                    message: 'Please input product brand',
+                    trigger: 'blur'
+                }],
+                price: [{
+                    required: true,
+                    message: 'Please input product price'
+                }, {
+                    type: 'number',
+                    message: 'price must be a number'
+                }],
+                quantity: [{
+                    required: true,
+                    message: 'Please input product quantity'
+                }, {
+                    type: 'number',
+                    message: 'quanlity must be a number'
+                }]
+            }
+        }
+    },
+
+    mounted() {
+
+        axios.get('http://localhost:3000/products/' + this.$route.params.productID)
+            .then((response) => {
+                this.form = response.data;
+                console.log(response);
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+    },
+    methods: {
+
+        onSubmit(formName) {
+
+
+        },
+        handleChange() {
+
+          },
+    }
+}
+
+</script>
