@@ -42,7 +42,7 @@ img {
     <el-table-column type="selection" width="50"></el-table-column>
     <el-table-column width="80">
         <template scope="scope">
-            <img :src="scope.row.imgURL" alt="">
+            <img :src="scope.row.imageURL" alt="">
 
         </template>
     </el-table-column>
@@ -56,7 +56,7 @@ img {
     <el-table-column label="" fixed="right" width="120">
         <template scope="scope">
             <el-button @click="handleClickEdit" size="small"><i class="el-icon-edit"></i></el-button>
-            <el-button @click="handleClickDelete" type="danger" size="small"><i class="el-icon-delete"></i></el-button>
+            <el-button @click="handleClickDelete(scope.row.product_id)" type="danger" size="small"><i class="el-icon-delete"></i></el-button>
         </template>
     </el-table-column>
 
@@ -71,20 +71,7 @@ import axios from 'axios'
 export default {
     name: 'Products',
     methods: {
-        handleSearchClick(ev) {
-                let data = this.tableData;
-                let keyword = this.input;
-                data = data.filter((item) => {
-                    console.log(item.name);
-                    console.log(item.name.search(keyword.toLowerCase()));
-                    return item.name.toLowerCase().indexOf(keyword.toLowerCase()) >= 0;
-                })
-
-
-                // console.log(keyword)
-                this.tableData = data;
-            },
-            handleSelectionChange(val) {
+        handleSelectionChange(val) {
                 this.multipleSelection = val;
 
                 // console.log(val.name);
@@ -132,16 +119,33 @@ export default {
                     }]
                 }
             },
-            handleClickDelete() {
+            handleClickDelete(id) {
+
                 this.$confirm('This will permanently delete the product. Continue?', 'Warning', {
                     confirmButtonText: 'OK',
                     cancelButtonText: 'Cancel',
                     type: 'warning'
                 }).then(() => {
-                    this.$message({
-                        type: 'success',
-                        message: 'Delete completed'
-                    });
+                    let self = this;
+
+                    axios.delete('http://localhost:3000/products/' + id)
+                        .then((response) => {
+                            let data = self.tableData;
+                            data = data.filter((el) => {
+                                return el.product_id != id
+                            })
+                            self.tableData = data;
+
+
+                            self.$message({
+                                type: 'success',
+                                message: 'Delete completed'
+                            });
+                        })
+                        .catch(function(error) {
+                            console.log(error);
+                        });
+
                 }).catch(() => {
                     this.$message({
                         type: 'info',

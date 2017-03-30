@@ -138,6 +138,8 @@ export default {
                       type: 'success',
                       message: 'Add product completed'
                   });
+
+                  this.form = {}
               } else {
                   console.log('error submit!!');
                   return false;
