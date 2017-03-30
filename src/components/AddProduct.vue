@@ -127,17 +127,18 @@ export default {
                   var form = this.form;
                   form.product_id = ObjectId()
 
+                  var self = this;
                   axios.post('http://localhost:3000/products', form)
                       .then(function(response) {
                           console.log(response);
+                          self.$message({
+                              type: 'success',
+                              message: 'Add product completed'
+                          });
                       })
                       .catch(function(error) {
                           console.log(error);
                       });
-                  this.$message({
-                      type: 'success',
-                      message: 'Add product completed'
-                  });
 
                   this.form = {}
               } else {

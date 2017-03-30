@@ -130,7 +130,31 @@ export default {
     methods: {
 
         onSubmit(formName) {
+          this.$refs[formName].validate((valid) => {
+              if (valid) {
+                  console.log(this.form);
+                  var form = this.form;
+                  var self = this;
 
+                  axios.put('http://localhost:3000/products/' + this.$route.params.productID, JSON.stringify(form))
+                      .then(function(response) {
+
+                          console.log(response);
+                          self.$message({
+                              type: 'success',
+                              message: 'Update product completed'
+                          });
+                      })
+                      .catch(function(error) {
+                          console.log(error);
+                      });
+
+
+              } else {
+                  console.log('error submit!!');
+                  return false;
+              }
+          });
 
         },
         handleChange() {
