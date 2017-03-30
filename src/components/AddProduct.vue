@@ -66,6 +66,11 @@ h3 {
 
 <script>
 
+import axios from 'axios'
+const ObjectId = (m = Math, d = Date, h = 16, s = s => m.floor(s).toString(h)) =>
+    s(d.now() / 1000) + ' '.repeat(h).replace(/./g, () => s(m.random() * h))
+
+
 export default {
     name: 'AddProduct',
     data() {
@@ -113,24 +118,35 @@ export default {
         }
     },
     methods: {
+
+        onSubmit(formName) {
+
+          this.$refs[formName].validate((valid) => {
+              if (valid) {
+                  console.log(this.form);
+                  var form = this.form;
+                  form.product_id = ObjectId()
+
+                  axios.post('http://localhost:3000/products', form)
+                      .then(function(response) {
+                          console.log(response);
+                      })
+                      .catch(function(error) {
+                          console.log(error);
+                      });
+                  this.$message({
+                      type: 'success',
+                      message: 'Add product completed'
+                  });
+              } else {
+                  console.log('error submit!!');
+                  return false;
+              }
+          });
+        },
         handleChange() {
 
-            },
-            onSubmit(formName) {
-                console.log('submit!');
-                this.$refs[formName].validate((valid) => {
-                    if (valid) {
-                        // alert('submit!');
-                        this.$message({
-                            type: 'success',
-                            message: 'Add product completed'
-                        });
-                    } else {
-                        console.log('error submit!!');
-                        return false;
-                    }
-                });
-            }
+          },
     }
 }
 
