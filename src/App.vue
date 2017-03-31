@@ -10,8 +10,9 @@
           <el-submenu index="1">
             <template slot="title">INVENTORY</template>
             <el-menu-item index="1-1"><router-link to="/products">Products</router-link></el-menu-item>
-            <el-menu-item index="1-2"><router-link to="/categories">Categories</router-link></el-menu-item>
-            <el-menu-item index="1-3">Brands</el-menu-item>
+            <el-menu-item index="1-2"><router-link to="/add-product">Add product</router-link></el-menu-item>
+            <el-menu-item index="1-3"><router-link to="/categories">Categories</router-link></el-menu-item>
+            <el-menu-item index="1-4">Brands</el-menu-item>
           </el-submenu>
           <el-menu-item index="2"><router-link to="/orders">ORDERS</router-link></el-menu-item>
           <el-menu-item index="3"><router-link to="/users">CUSTOMERS</router-link></el-menu-item>

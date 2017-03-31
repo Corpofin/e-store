@@ -14,7 +14,7 @@ h3 {
 
     <el-col :span="10">
 
-        <h3>Update product  {{$route.params.productID}}</h3>
+          <h3>Update product  {{$route.params.productID}}</h3>
 
         <el-form ref="form" :rules="rules" :model="form" label-width="120px">
             <el-form-item label="Name" prop="name">
@@ -117,14 +117,19 @@ export default {
     },
 
     mounted() {
-
+        var self = this;
         axios.get('http://localhost:3000/products/' + this.$route.params.productID)
             .then((response) => {
                 this.form = response.data;
-                console.log(response);
+                // console.log(response);
             })
             .catch(function(error) {
                 console.log(error);
+
+                self.$message({
+                    type: 'error',
+                    message: 'This product has been removed'
+                });
             });
     },
     methods: {
@@ -132,11 +137,13 @@ export default {
         onSubmit(formName) {
           this.$refs[formName].validate((valid) => {
               if (valid) {
-                  console.log(this.form);
                   var form = this.form;
                   var self = this;
 
-                  axios.put('http://localhost:3000/products/' + this.$route.params.productID, JSON.stringify(form))
+                  delete form._id;
+                  form = JSON.stringify(form)
+
+                  axios.put('http://localhost:3000/products/' + this.$route.params.productID, JSON.parse(form))
                       .then(function(response) {
 
                           console.log(response);

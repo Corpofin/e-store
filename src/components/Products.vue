@@ -50,7 +50,14 @@ img {
     <el-table-column prop="name" label="Name" width="350"></el-table-column>
     <el-table-column prop="category" label="Category" width="120"></el-table-column>
     <el-table-column prop="brand" label="Brand" width="150"></el-table-column>
-    <el-table-column prop="stockStatus" label="Stock Status" width="120"></el-table-column>
+    <el-table-column label="Stock Status" width="120">
+      <template scope="scope">
+        <div class="">
+          {{scope.row.quantity > 0 ? 'In stock' : 'Out of stock'}}
+        </div>
+          <!-- <el-tag :type="scope.row.quantity >= ? 'danger' : 'success'">{{scope.row.paymentStatus}}</el-tag> -->
+      </template>
+    </el-table-column>
     <el-table-column prop="price" label="Price" width="80"></el-table-column>
 
     <el-table-column label="" fixed="right" width="120">
