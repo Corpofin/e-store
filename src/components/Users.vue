@@ -18,7 +18,7 @@
     <el-table-column label="" fixed="right" width="120">
         <template scope="scope">
             <el-button @click="handleClickEdit" size="small"><a href="/sdfsd"><i class="el-icon-edit"></i></a></el-button>
-            <el-button @click="handleClickDelete" type="danger" size="small"><i class="el-icon-delete"></i></el-button>
+            <el-button @click="handleClickDelete(scope.row.user_id)" type="danger" size="small"><i class="el-icon-delete"></i></el-button>
         </template>
         </el-table-column>
 </data-tables>
@@ -26,60 +26,52 @@
 </template>
 
 <script>
+import axios from 'axios'
 
 export default {
     name: 'Orders',
     data() {
         return {
-            tableData: [{
-                userID: 5111,
-                name: 'Christina Pearson',
-                email: 'christina-90@example.com',
-                registerd_since: '2017-01-19T08:59:17.340Z'
-            }, {
-                userID: 5112,
-                name: 'Paul Griffin',
-                email: 'paul-griffin@example.com',
-                registerd_since: '2017-01-18T12:56:31.100Z'
-            }, {
-                userID: 5113,
-                name: 'Hannah Griffin',
-                email: 'hannah_92@example.com',
-                registerd_since: '2017-01-18T12:55:35.985Z'
-            }, {
-                userID: 5114,
-                name: 'Henry Rodriguez',
-                email: 'henry-93@example.com',
-                registerd_since: '2017-01-18T12:54:35.259Z'
-            }, {
-                userID: 5115,
-                name: 'Joshua Lee',
-                email: 'joshua-lee@example.com',
-                registerd_since: '2017-01-18T12:53:43.947Z'
-            }, {
-                userID: 5116,
-                name: 'Timothy Warren',
-                email: 'timothy93@example.com',
-                registerd_since: '2017-01-18T12:55:35.985Z'
-            }, {
-                userID: 5117,
-                name: 'Joseph Simpson',
-                email: 'joseph_93@example.com ',
-                registerd_since: '2017-01-18T12:54:35.259Z'
-            }, {
-                userID: 5118,
-                name: 'Phan Quỳnh',
-                email: 'phanquynh@example.com',
-                registerd_since: '2017-01-18T12:53:43.947Z'
-            }],
+            tableData: [],
             multipleSelection: []
         }
+    },
+    mounted() {
+        axios.get('http://localhost:3000/users')
+            .then((response) => {
+
+              console.log(response.data);
+                this.tableData = response.data;
+                console.log(response);
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
     },
     methods: {
             handleClickEdit() {
 
             },
-            handleClickDelete() {
+            handleClickDelete(id) {
+              var self = this
+              axios.delete('http://localhost:3000/users/' + id)
+                  .then((response) => {
+                      let data = self.tableData;
+                      data = data.filter((el) => {
+                          return el.user_id != id
+                      })
+                      self.tableData = data;
+
+
+                      self.$message({
+                          type: 'success',
+                          message: 'Delete completed'
+                      });
+                  })
+                  .catch(function(error) {
+                      console.log(error);
+                  });
+
 
             },
             handleSelectionChange(val) {
@@ -127,6 +119,8 @@ export default {
                     }]
                 }
             },
+
+
 
             // getRowActionsDef() {
             //     let self = this
