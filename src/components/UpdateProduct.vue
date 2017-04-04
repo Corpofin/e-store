@@ -23,12 +23,29 @@ h3 {
             <!-- <el-form-item> -->
             <!-- <el-col :span="12"> -->
             <el-form-item label="Category" prop="category">
-                <el-input v-model="form.category"></el-input>
+              <el-select v-model="form.category"
+                filterable
+                allow-create
+                placeholder="Choose a category">
+                <el-option
+                  v-for="item in categories" :label="item" :value="item">
+                </el-option>
+              </el-select>
             </el-form-item>
             <!-- </el-col> -->
             <!-- <el-col :span="12"> -->
             <el-form-item label="Brand" prop="brand">
-                <el-input v-model="form.brand"></el-input>
+              <el-select
+                v-model="form.brand"
+                filterable
+                allow-create
+                placeholder="Choose a brand">
+                <el-option
+                  v-for="item in brands"
+                  :label="item"
+                  :value="item">
+                </el-option>
+              </el-select>
             </el-form-item>
             <!-- </el-col> -->
             <!-- </el-form-item> -->
@@ -82,6 +99,8 @@ export default {
                 desc: '',
                 imageURL: ''
             },
+            categories: ['Computers', 'Cell Phones', 'TV', 'Audio', 'Cameras'],
+            brands: ['Apple', 'Samsung', 'LG', 'Sony', 'Asus', 'Dell', 'Canon', 'Lenovo', 'HP'],
             rules: {
                 name: [{
                     required: true,

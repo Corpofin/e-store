@@ -40,12 +40,12 @@ img {
 <data-tables :data='tableData' :has-action-col='false' :pagination-def='getPaginationDef()' :actions-def='getActionsDef()' @selection-change="handleSelectionChange">
 
     <el-table-column type="selection" width="50"></el-table-column>
-    <el-table-column width="80">
+    <!-- <el-table-column width="80">
         <template scope="scope">
             <img :src="scope.row.imageURL" alt="">
 
         </template>
-    </el-table-column>
+    </el-table-column> -->
 
     <el-table-column prop="name" label="Name" width="350"></el-table-column>
     <el-table-column prop="category" label="Category" width="120"></el-table-column>
