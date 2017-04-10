@@ -100,7 +100,7 @@ div.section {
     <el-col :span='10'>
         <el-card class="customer-card">
             <div slot="header" class="clearfix">
-                <h3>Customer Details</span>
+                <h3>Customer Details</h3>
             </div>
 
             <div class="">
@@ -126,7 +126,7 @@ div.section {
     <el-col :span='14'>
       <el-card class="customer-card">
           <div slot="header" class="clearfix">
-              <h3>Items</span>
+              <h3>Items</h3>
           </div>
 
           <div class="">
@@ -145,6 +145,7 @@ div.section {
               Order Total <p>${{ this.order.total }}</p>
             </div>
           </div>
+      </el-card>    
     </el-col>
 </el-row>
 
