@@ -1,10 +1,12 @@
 <style lang="css">
-  a {
+
+a {
     color: #3b79c1;
-  }
-  .el-table--border td {
+}
+
+.el-table--border td {
     border-right: none;
-  }
+}
 
 </style>
 
@@ -29,9 +31,9 @@
         </template>
     </el-table-column>
     <el-table-column prop="total" label="Total">
-      <template scope="scope">
-          {{scope.row.total}}$
-      </template>
+        <template scope="scope">
+            {{scope.row.total}}$
+        </template>
     </el-table-column>
     <el-table-column prop="customerID" label="Customer ID">
 

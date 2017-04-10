@@ -156,6 +156,16 @@ export default {
                               type: 'success',
                               message: 'Add product completed'
                           });
+
+                          self.form = {
+                              name: '',
+                              category: '',
+                              brand: '',
+                              price: 0,
+                              quantity: 0,
+                              desc: '',
+                              imageURL: ''
+                          }
                       })
                       .catch(function(error) {
                           console.log(error);

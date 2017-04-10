@@ -58,7 +58,7 @@ img {
           <!-- <el-tag :type="scope.row.quantity >= ? 'danger' : 'success'">{{scope.row.paymentStatus}}</el-tag> -->
       </template>
     </el-table-column>
-    <el-table-column prop="price" label="Price" width="80"></el-table-column>
+    <el-table-column prop="price" label="Price (USD)" width="120"></el-table-column>
 
     <el-table-column label="" fixed="right" width="120">
         <template scope="scope">
