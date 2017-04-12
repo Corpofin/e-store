@@ -100,9 +100,24 @@ export default {
 
                                 let data = self.tableData;
                                 for (var item of self.multipleSelection) {
-                                    data = data.filter((el) => {
-                                        return el.id != item.id
-                                    })
+                                  let id = item.product_id;
+
+                                  axios.delete('http://localhost:3000/products/' + id)
+                                      .then((response) => {
+                                          let data = self.tableData;
+                                          data = data.filter((el) => {
+                                              return el.product_id != id
+                                          })
+                                          self.tableData = data;
+
+                                          self.$message({
+                                              type: 'success',
+                                              message: 'Delete completed'
+                                          });
+                                      })
+                                      .catch(function(error) {
+                                          console.log(error);
+                                      });
                                 }
                                 self.tableData = data;
 
