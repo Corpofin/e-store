@@ -140,7 +140,7 @@ div.section {
                     <el-table-column prop="quantity" label="Quantity" width="100"></el-table-column>
                     <el-table-column prop="total" label="Total" width="100">
                         <template scope='scope'>
-                            ${{scope.row.total}}
+                            ${{scope.row.price}}
                         </template>
                     </el-table-column>
                 </el-table>
@@ -211,7 +211,27 @@ export default {
 
                 this.order = response.data;
                 this.customer = this.order.customer_detail
-                // console.log(this.order.customer_detail);
+
+                let items = this.order.items;
+
+                for(let item of items) {
+                  axios.get('http://localhost:3000/products/' + item.product_id)
+                      .then((response) => {
+                          let product = response.data;
+                          item.name = product.name;
+                          item.price = product.price;
+                          this.items.push(item);
+                      })
+                      .catch(function(error) {
+                          console.log(error);
+
+                          self.$message({
+                              type: 'error',
+                              message: 'This product has been removed'
+                          });
+                      });
+                }
+
             })
             .catch(function(error) {
                 console.log(error);
@@ -221,7 +241,12 @@ export default {
                     message: error
                 });
             });
+
+
     },
+    updated() {
+
+    }
 }
 
 </script>
