@@ -56,11 +56,11 @@ div.section {
             <el-col :span="12">
                 <div class="section">
                     <p class="title">Date</p>
-                    <p>{{ this.order.date }}</p>
+                    <p>{{ new Date(order.date) }}</p>
                 </div>
                 <div class="section">
                     <p class="title">Fulfillment</p>
-                    <el-select v-model="fulfillmentValue" placeholder="Select">
+                    <el-select v-model="order.delivery_status" placeholder="Select">
                         <el-option v-for="item in fulfillmentOptions" :label="item.label" :value="item.value">
                         </el-option>
                     </el-select>
@@ -72,14 +72,14 @@ div.section {
             <el-col :span="12">
                 <div class="section">
                     <p class="title">Order Status</p>
-                    <el-select v-model="orderValue" placeholder="Select">
+                    <el-select v-model="order.state" placeholder="Select">
                         <el-option v-for="item in orderOptions" :label="item.label" :value="item.value">
                         </el-option>
                     </el-select>
                 </div>
                 <div class="section">
                     <p class="title">Payment</p>
-                    <el-select v-model="paymentValue" placeholder="Select">
+                    <el-select v-model="order.payment_status" placeholder="Select">
                         <el-option v-for="item in paymentOptions" :label="item.label" :value="item.value">
                         </el-option>
                     </el-select>
@@ -104,19 +104,23 @@ div.section {
             </div>
 
             <div class="">
-                <div class="section">
-                  <p class="title">Name</p>
-                  <p>{{this.customer.name}}</p>
-                </div>
-                <div class="section">
-                  <p class="title">Address</p>
-                  <p>{{this.customer.address}}</p>
-                </div>
-                <div class="section">
-                  <p class="title">Email</p>
-                  <p>{{this.customer.email}}</p>
-                </div>
-            </div>
+               <div class="section">
+                 <p class="title">Name</p>
+                 <p>{{this.customer.name}}</p>
+               </div>
+               <div class="section">
+                 <p class="title">Address</p>
+                 <p>{{this.customer.address}}</p>
+               </div>
+               <div class="section">
+                 <p class="title">Email</p>
+                 <p>{{this.customer.email}}</p>
+               </div>
+               <div class="section">
+                 <p class="title">Telephone</p>
+                 <p>{{this.customer.telephone}}</p>
+               </div>
+           </div>
 
         </el-card>
 
@@ -124,34 +128,37 @@ div.section {
     </el-col>
 
     <el-col :span='14'>
-      <el-card class="customer-card">
-          <div slot="header" class="clearfix">
-              <h3>Items</h3>
-          </div>
-
-          <div class="">
-            <el-table :data="items">
-              <el-table-column type="index" width="50"></el-table-column>
-              <el-table-column prop="name" label="Name"></el-table-column>
-              <el-table-column prop="quantity" label="Quantity" width="100"></el-table-column>
-              <el-table-column prop="total" label="Total" width="100">
-                <template scope='scope'>
-                  ${{scope.row.total}}
-                </template>
-              </el-table-column>
-            </el-table>
-
-            <div class="total">
-              Order Total <p>${{ this.order.total }}</p>
+        <el-card class="customer-card">
+            <div slot="header" class="clearfix">
+                <h3>Items</h3>
             </div>
-          </div>
-      </el-card>    
+
+            <div class="">
+                <el-table :data="items">
+                    <el-table-column type="index" width="50"></el-table-column>
+                    <el-table-column prop="name" label="Name"></el-table-column>
+                    <el-table-column prop="quantity" label="Quantity" width="100"></el-table-column>
+                    <el-table-column prop="total" label="Total" width="100">
+                        <template scope='scope'>
+                            ${{scope.row.total}}
+                        </template>
+                    </el-table-column>
+                </el-table>
+
+                <div class="total">
+                    Order Total
+                    <p>${{ this.order.total }}</p>
+                </div>
+            </div>
+        </el-card>
     </el-col>
 </el-row>
 
 </template>
 
 <script>
+
+import axios from 'axios';
 
 export default {
     methods: {
@@ -163,32 +170,9 @@ export default {
     },
     data() {
         return {
-            order: {
-                orderID: '123213',
-                date: '2016-05-03',
-                status: 'open',
-                fulfillmentStaus: 'unfulfilled',
-                paymentStatus: 'unpaid',
-                total: 1323,
-                customerID: '45645'
-            },
-            customer: {
-                name: 'Daniel Wright',
-                email: 'daniel83@example.com',
-                address: '2822 Hoffman Avenue, Flintstone, Georgia'
-
-            },
-            items: [{
-                name: 'Smart Tivi LED Samsung 43 inch 4K',
-                quantity: 1,
-                unit_price: 528,
-                total: 525
-            }, {
-                name: 'Neato Robotics - Botvac D3 App-Controlled Robot Vacuum - Dark gray',
-                quantity: 2,
-                unit_price: 399,
-                total: 798
-            }],
+            order: {},
+            customer: {},
+            items: [],
             orderOptions: [{
                 value: 'open',
                 label: 'Open'
@@ -217,13 +201,27 @@ export default {
             fulfillmentValue: '',
             paymentValue: ''
         }
-    },
-    created: function() {
-        this.orderValue = this.order.status;
-        this.fulfillmentValue = this.order.fulfillmentStaus;
-        this.paymentValue = this.order.paymentStatus;
-    }
 
+
+    },
+    mounted() {
+        var self = this;
+        axios.get('http://localhost:3000/orders/' + this.$route.params.orderID)
+            .then((response) => {
+
+                this.order = response.data;
+                this.customer = this.order.customer_detail
+                // console.log(this.order.customer_detail);
+            })
+            .catch(function(error) {
+                console.log(error);
+
+                self.$message({
+                    type: 'error',
+                    message: error
+                });
+            });
+    },
 }
 
 </script>
