@@ -17,7 +17,7 @@
     <el-table-column prop="registerd_since" label="Registerd Since" sortable="custom"></el-table-column>
     <el-table-column label="" fixed="right" width="120">
         <template scope="scope">
-            <el-button @click="handleClickEdit" size="small"><a href="/sdfsd"><i class="el-icon-edit"></i></a></el-button>
+            <!-- <el-button @click="handleClickEdit" size="small"><a href="/sdfsd"><i class="el-icon-edit"></i></a></el-button> -->
             <el-button @click="handleClickDelete(scope.row.user_id)" type="danger" size="small"><i class="el-icon-delete"></i></el-button>
         </template>
         </el-table-column>
@@ -49,9 +49,7 @@ export default {
             });
     },
     methods: {
-            handleClickEdit() {
 
-            },
             handleClickDelete(id) {
               var self = this
               axios.delete('http://localhost:3000/users/' + id)
@@ -87,19 +85,31 @@ export default {
                         type: 'danger',
                         name: 'delete',
                         handler() {
-
-                            console.log("delete hihi");
-                            self.$confirm('This will permanently delete the users. Continue?', 'Warning', {
+                            self.$confirm('This will permanently delete the user. Continue?', 'Warning', {
                                 confirmButtonText: 'OK',
                                 cancelButtonText: 'Cancel',
                                 type: 'warning'
                             }).then(() => {
-
                                 let data = self.tableData;
                                 for (var item of self.multipleSelection) {
-                                    data = data.filter((el) => {
-                                        return el.userID != item.userID
-                                    })
+                                  let id = item.user_id;
+
+                                  axios.delete('http://localhost:3000/users/' + id)
+                                      .then((response) => {
+                                          let data = self.tableData;
+                                          data = data.filter((el) => {
+                                              return el.user_id != id
+                                          })
+                                          self.tableData = data;
+
+                                          self.$message({
+                                              type: 'success',
+                                              message: 'Delete completed'
+                                          });
+                                      })
+                                      .catch(function(error) {
+                                          console.log(error);
+                                      });
                                 }
                                 self.tableData = data;
 
@@ -107,6 +117,7 @@ export default {
                                     type: 'success',
                                     message: 'Delete completed'
                                 });
+
                             }).catch(() => {
                                 self.$message({
                                     type: 'info',
@@ -119,27 +130,6 @@ export default {
                     }]
                 }
             },
-
-
-
-            // getRowActionsDef() {
-            //     let self = this
-            //     return [{
-            //         type: 'primary',
-            //         handler(row) {
-            //             self.$message('Edit clicked')
-            //             console.log('Edit in row clicked', row)
-            //         },
-            //         name: 'Edit'
-            //     }, {
-            //         type: 'danger',
-            //         handler(row) {
-            //             self.$message('Delete in row clicked')
-            //             console.log('Delete in row clicked', row)
-            //         },
-            //         name: 'Delete'
-            //     }]
-            // },
 
             getPaginationDef() {
                 return {
