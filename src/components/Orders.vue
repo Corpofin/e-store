@@ -26,13 +26,13 @@
     <!-- fulfillmentStaus -->
     <el-table-column prop="delivery_status" label="Fulfillment Staus">
         <template scope="scope">
-            <el-tag :type="scope.row.delivery_status == 'fulfilled' ? 'success' : 'danger'">{{scope.row.delivery_status}}</el-tag>
+            <el-tag :type="scope.row.delivery_status == 'Fulfilled' ? 'success' : 'danger'">{{scope.row.delivery_status}}</el-tag>
         </template>
     </el-table-column>
     <!-- payment status -->
     <el-table-column prop="payment_status" label="Payment Staus">
         <template scope="scope">
-            <el-tag :type="scope.row.payment_status == 'paid' ? 'danger' : 'success'">{{scope.row.payment_status}}</el-tag>
+            <el-tag :type="scope.row.payment_status == 'Unpaid' ? 'danger' : 'success'">{{scope.row.payment_status}}</el-tag>
         </template>
     </el-table-column>
     <!-- price total -->

@@ -62,7 +62,7 @@ div.section {
                     <p class="title">Fulfillment</p>
                     <el-select v-model="order.delivery_status" placeholder="Select">
                         <el-option v-for="item in fulfillmentOptions" :label="item.label" :value="item.value">
-                        </el-option>
+                          </el-option>
                     </el-select>
                 </div>
 
@@ -104,23 +104,23 @@ div.section {
             </div>
 
             <div class="">
-               <div class="section">
-                 <p class="title">Name</p>
-                 <p>{{this.customer.name}}</p>
-               </div>
-               <div class="section">
-                 <p class="title">Address</p>
-                 <p>{{this.customer.address}}</p>
-               </div>
-               <div class="section">
-                 <p class="title">Email</p>
-                 <p>{{this.customer.email}}</p>
-               </div>
-               <div class="section">
-                 <p class="title">Telephone</p>
-                 <p>{{this.customer.telephone}}</p>
-               </div>
-           </div>
+                <div class="section">
+                    <p class="title">Name</p>
+                    <p>{{this.customer.name}}</p>
+                </div>
+                <div class="section">
+                    <p class="title">Address</p>
+                    <p>{{this.customer.address}}</p>
+                </div>
+                <div class="section">
+                    <p class="title">Email</p>
+                    <p>{{this.customer.email}}</p>
+                </div>
+                <div class="section">
+                    <p class="title">Telephone</p>
+                    <p>{{this.customer.telephone}}</p>
+                </div>
+            </div>
 
         </el-card>
 
@@ -163,9 +163,20 @@ import axios from 'axios';
 export default {
     methods: {
         update() {
-                console.log(this.orderValue);
-                console.log(this.fulfillmentValue);
-            },
+
+          axios.post('http://localhost:3000/orders/' + this.$route.params.orderID, {
+            	"state": this.order.state,
+            	"delivery_status": this.order.delivery_status,
+            	"payment_status": this.order.payment_status
+          })
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+
+        },
 
     },
     data() {
@@ -214,22 +225,22 @@ export default {
 
                 let items = this.order.items;
 
-                for(let item of items) {
-                  axios.get('http://localhost:3000/products/' + item.product_id)
-                      .then((response) => {
-                          let product = response.data;
-                          item.name = product.name;
-                          item.price = product.price;
-                          this.items.push(item);
-                      })
-                      .catch(function(error) {
-                          console.log(error);
+                for (let item of items) {
+                    axios.get('http://localhost:3000/products/' + item.product_id)
+                        .then((response) => {
+                            let product = response.data;
+                            item.name = product.name;
+                            item.price = product.price;
+                            this.items.push(item);
+                        })
+                        .catch(function(error) {
+                            console.log(error);
 
-                          self.$message({
-                              type: 'error',
-                              message: 'This product has been removed'
-                          });
-                      });
+                            self.$message({
+                                type: 'error',
+                                message: 'This product has been removed'
+                            });
+                        });
                 }
 
             })
@@ -244,9 +255,7 @@ export default {
 
 
     },
-    updated() {
 
-    }
 }
 
 </script>
