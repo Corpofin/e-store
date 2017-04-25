@@ -163,7 +163,7 @@ import axios from 'axios';
 export default {
     methods: {
         update() {
-
+          var self = this;
           axios.post('http://localhost:3000/orders/' + this.$route.params.orderID, {
             	"state": this.order.state,
             	"delivery_status": this.order.delivery_status,
@@ -171,6 +171,10 @@ export default {
           })
           .then((res) => {
             console.log(res);
+            self.$message({
+                type: 'success',
+                message: 'Update completed'
+            });
           })
           .catch((err) => {
             console.log(err);
@@ -185,27 +189,27 @@ export default {
             customer: {},
             items: [],
             orderOptions: [{
-                value: 'open',
+                value: 'Open',
                 label: 'Open'
             }, {
-                value: 'completed',
+                value: 'Completed',
                 label: 'Completed'
             }, {
-                value: 'canceled',
+                value: 'Canceled',
                 label: 'Canceled'
             }],
             fulfillmentOptions: [{
-                value: 'unfulfilled',
+                value: 'Unfulfilled',
                 label: 'Unfulfilled'
             }, {
-                value: 'fulfilled',
+                value: 'Fulfilled',
                 label: 'Fulfilled'
             }],
             paymentOptions: [{
-                value: 'unpaid',
+                value: 'Unpaid',
                 label: 'Unpaid'
             }, {
-                value: 'paid',
+                value: 'Paid',
                 label: 'Paid'
             }],
             orderValue: '',
