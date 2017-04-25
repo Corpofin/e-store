@@ -221,7 +221,7 @@ export default {
             .then((response) => {
 
                 this.order = response.data;
-                this.customer = this.order.customer_detail
+                this.customer = this.order.customer;
 
                 let items = this.order.items;
 
