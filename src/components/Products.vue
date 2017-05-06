@@ -116,7 +116,13 @@ export default {
                                           });
                                       })
                                       .catch(function(error) {
-                                          console.log(error);
+                                        self.$message({
+                                            type: 'error',
+                                            message: 'There are some errors, please check your network connection and try again'
+                                        });
+
+                                        console.log(error)
+
                                       });
                                 }
                                 self.tableData = data;
@@ -165,7 +171,11 @@ export default {
                             });
                         })
                         .catch(function(error) {
-                            console.log(error);
+                          self.$message({
+                              type: 'error',
+                              message: 'There are some errors, please check your network connection and try again'
+                          });
+
                         });
 
                 }).catch(() => {
@@ -197,7 +207,7 @@ export default {
                 console.log(response);
             })
             .catch(function(error) {
-                console.log(error);
+                console.log(error)
             });
     }
 }
