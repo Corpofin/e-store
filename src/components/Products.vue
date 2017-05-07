@@ -118,10 +118,9 @@ export default {
                                       .catch(function(error) {
                                         self.$message({
                                             type: 'error',
-                                            message: 'There are some errors, please check your network connection and try again'
+                                            message: error.message
                                         });
 
-                                        console.log(error)
 
                                       });
                                 }
@@ -173,7 +172,7 @@ export default {
                         .catch(function(error) {
                           self.$message({
                               type: 'error',
-                              message: 'There are some errors, please check your network connection and try again'
+                              message: error.message
                           });
 
                         });
