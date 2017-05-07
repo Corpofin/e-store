@@ -72,7 +72,7 @@ h3 {
 
             <el-form-item>
                 <el-button type="primary" @click="onSubmit('form')">Create</el-button>
-                <el-button>Cancel</el-button>
+                <el-button @click="cancel">Cancel</el-button>
             </el-form-item>
 
         </el-form>
@@ -110,6 +110,9 @@ export default {
                     required: true,
                     message: 'Please input product name',
                     trigger: 'blur'
+                }, {
+                    max: 100,
+                    message: 'Maxinum product name length is 100'
                 }],
                 category: [{
                     required: true,
@@ -176,6 +179,15 @@ export default {
                   return false;
               }
           });
+        },
+        cancel() {
+          this.$message({
+              type: 'success',
+              message: 'Create product cancelled'
+          });
+
+          this.$router.push({ name: 'Product'})
+
         },
         handleChange() {
 

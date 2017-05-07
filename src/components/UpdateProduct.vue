@@ -71,7 +71,7 @@ h3 {
 
             <el-form-item>
                 <el-button type="primary" @click="onSubmit('form')">Update</el-button>
-                <el-button>Cancel</el-button>
+                <el-button @click="cancel">Cancel</el-button>
             </el-form-item>
 
         </el-form>
@@ -106,6 +106,9 @@ export default {
                     required: true,
                     message: 'Please input product name',
                     trigger: 'blur'
+                }, {
+                    max: 100,
+                    message: 'Maxinum product name length is 100'
                 }],
                 category: [{
                     required: true,
@@ -130,6 +133,10 @@ export default {
                 }, {
                     type: 'number',
                     message: 'quanlity must be a number'
+                }],
+                desc: [{
+                      max: 1000,
+                      message: 'Maxinum de name length is 1000'
                 }]
             }
         }
@@ -147,7 +154,7 @@ export default {
 
                 self.$message({
                     type: 'error',
-                    message: 'This product has been removed'
+                    message: error.message
                 });
             });
     },
@@ -181,6 +188,15 @@ export default {
                   return false;
               }
           });
+
+        },
+        cancel() {
+          this.$message({
+              type: 'success',
+              message: 'Update product cancelled'
+          });
+
+          this.$router.push({ name: 'Product'})
 
         },
         handleChange() {
